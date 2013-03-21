@@ -19,7 +19,7 @@
 $bitrixDir = dirname( __FILE__ ) . '/../..';
 require $bitrixDir . '/modules/main/include.php';
 
-list( $arCData['nspace'], $arCData['name'] ) = explode( ':', $_GET['component'] );
+list( $arCData['nspace'], $arCData['name'] ) = explode( ':', urldecode($_GET['component']) );
 
 // Валидация пространства имён и названия компонента
 // Не даст подключить файл .parametrs.php из директории, отличной от /bitrix/components
@@ -35,8 +35,8 @@ if( !preg_match( '/[a-zA-Z_-]+/', $arCData['nspace'] )
     die;
 }
 
-$arCData['dir']  = $bitrixDir . '/components/' 
-                 . $arCData['nspace'] . '/' 
+$arCData['dir']  = $bitrixDir . '/components/'
+                 . $arCData['nspace'] . '/'
                  . $arCData['name'];
 
 $arReturn = array(
@@ -46,9 +46,9 @@ if( is_file( $arCData['dir'] . '/.parameters.php' ) ){
     include $arCData['dir'] . '/.parameters.php';
 
     ksort( $arComponentParameters['PARAMETERS'] );
-    
+
     foreach( $arComponentParameters['PARAMETERS'] as $paramName => $arParam ){
-        $arParams[ $paramName ] = $arParam['DEFAULT'];
+        $arParams[ $paramName ] = $arParam['DEFAULT'] ? $arParam['DEFAULT'] : '';
     }
     $arReturn['status'] = 'found';
     $arReturn['data'] = $arParams;
