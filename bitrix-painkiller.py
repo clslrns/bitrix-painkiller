@@ -1,36 +1,69 @@
 # -*- coding: utf-8 -*-
 import sublime, sublime_plugin
 import re
+import httplib, urllib
+import json
+
+__version__      = '0.1'
+__core_version__ = '0.1'
+__authors__      = ['"Vitaly Chirkov" <vitaly.chirkov@gmail.com>']
+
+# load settings
+settings = sublime.load_settings('Painkiller.sublime-settings')
 
 class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
 
-    def find_name( self, view ):
-        """Find name of bitrix component on the left from cursor."""
-        end = view.sel()[0].end()
-        if end < 3:
-            return ''
-        begin = end - 3
+    def find_name( self, view, cursorId ):
+        """Find name of Bitrix component on the left from cursor."""
+        end = view.sel()[cursorId].end()
 
-        lastMatch = ''
-        while begin:
-            regionContent = view.substr( sublime.Region( begin, end ) )
-            # Component name match
-            matchRes = re.match( '(\s|^)(([a-zA-Z_-]+):([a-zA-Z._-]+))', regionContent )
-            if matchRes:
-                lastMatch = matchRes.group(2)
-            elif lastMatch or re.search( '\s', regionContent ):
-                # Finish the iteration when we found one name 
-                # or there is a space in search region
-                begin = 1
-            begin -= 1
+        regionContent = view.substr( view.line( end ) )
 
-        return lastMatch
+        matchRes = re.search( \
+            '(?P<cname>([a-zA-Z_-]+):([a-zA-Z._-]+))', \
+            regionContent \
+        )
+        return matchRes.group('cname') if matchRes else None
 
     def get_component_signature( self, componentName ):
-        pass
+        conn = httplib.HTTPConnection('zitar.dev')
+        conn.request( 'GET', '/bp.php?component=' + componentName )
+        response = conn.getresponse()
+        componentParams = json.loads( response.read() )
+        conn.close()
+        return componentParams
 
     def run( self, edit, block = False ):
         view = self.view
         path = view.file_name()
 
-        print self.find_name(view)
+        for cursorId, cursorPos in enumerate( view.sel() ):
+            name = self.find_name(view, cursorId)
+
+            if not name:
+                continue
+
+            requestResult = self.get_component_signature( name )
+
+            view.erase( edit, view.find( name, view.sel()[cursorId].begin() - len(name) ) )
+            pref = ' ' * ( view.sel()[cursorId].begin() \
+                           - view.line( view.sel()[cursorId].begin() ).begin() )
+
+            print dir( requestResult )
+
+            params = u''
+            if requestResult['status'] == 'found':
+                for key in requestResult['data']:
+                    params += "%s        '%s' => '%s',\n" % (pref, key, requestResult['data'][key])
+
+            code = "<?$APPLICATION->IncludeComponent(\n" \
+                 + "{pref}    '{name}',\n" \
+                 + "{pref}    '',\n" \
+                 + "{pref}    array(\n{params}" \
+                 + "{pref}    )\n" \
+                 + "{pref})?>"
+            code = code.format( pref = pref, name = name, params = params )
+
+            view.insert(edit, view.sel()[cursorId].end(), code)
+
+
