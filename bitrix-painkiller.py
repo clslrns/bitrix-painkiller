@@ -61,7 +61,7 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
                 if( host ):
                     return host
 
-        return false
+        return False
 
     def get_component_signature( self, componentName, host ):
         conn = httplib.HTTPConnection( host )
@@ -77,7 +77,7 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
         host = self.get_host( path )
 
         if not host:
-            return false
+            return False
 
         for cursorId, cursorPos in enumerate( view.sel() ):
             name = self.find_name(view, cursorId)
