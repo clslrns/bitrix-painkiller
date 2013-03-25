@@ -6,6 +6,7 @@ import json
 import os
 import socket
 import threading
+import math
 
 __version__      = '0.1'
 __core_version__ = '0.1'
@@ -98,29 +99,30 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
 
     def replace( self, name, selId, reqResult ):
         """ Replaces component name by generated code, based on recieved component' params"""
-
-        print 'thread ' + name
-
         view = self.view
+        settings = view.settings()
         edit = view.begin_edit('bitrix-painkiller')
         view.erase( edit, view.find( name, view.sel()[selId].begin() - len(name) ) )
 
-        # Left margin for generated lines equals current line' left margin
-        pref = ' ' * ( view.sel()[selId].begin()
-                       - view.line( view.sel()[selId].begin() ).begin() )
+        # Margin for generated lines equals current line' left margin
+        margin = view.sel()[selId].begin() - view.line( view.sel()[selId].begin() ).begin()
+
+        prefUnit = ' ' * settings.get('tab_size') if settings.get('translate_tabs_to_spaces') else '\t'
+        pref = margin * prefUnit
 
         params = u''
         if reqResult['status'] == 'found':
             for key in reqResult['data']:
-                params += "%s        '%s' => '%s',\n" % (pref, key, reqResult['data'][key])
+                param = "{pref}{pu}{pu}'{key}' => '{val}',\n"
+                params += param.format( pref = pref, key = key, val = reqResult['data'][key], pu = prefUnit )
 
         code = "<?$APPLICATION->IncludeComponent(\n" \
-             + "{pref}    '{name}',\n" \
-             + "{pref}    '',\n" \
-             + "{pref}    array(\n{params}" \
-             + "{pref}    )\n" \
+             + "{pref}{pu}'{name}',\n" \
+             + "{pref}{pu}'',\n" \
+             + "{pref}{pu}array(\n{params}" \
+             + "{pref}{pu})\n" \
              + "{pref})?>"
-        code = code.format( pref = pref, name = name, params = params )
+        code = code.format( pref = pref, name = name, params = params, pu = prefUnit )
 
         view.insert( edit, view.sel()[selId].end(), code )
         view.end_edit(edit)
