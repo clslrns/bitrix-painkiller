@@ -33,15 +33,18 @@ class BitrixPainkillerApiCall( threading.Thread ):
 
     def run(self):
         """ Send requests for component default parameters to site script"""
-        try:
-            self.conn = httplib.HTTPConnection( self.host )
-            params = urllib.urlencode({'component': self.componentName})
-            self.conn.request( 'GET', self.apiUrl + '?' + params  )
-            response = self.conn.getresponse()
-            self.result = json.loads( response.read() )
-            self.conn.close()
-        except socket.error:
-            self.result = { 'status': 'network_error' }
+        if self.host:
+            try:
+                self.conn = httplib.HTTPConnection( self.host )
+                params = urllib.urlencode({'component': self.componentName})
+                self.conn.request( 'GET', self.apiUrl + '?' + params  )
+                response = self.conn.getresponse()
+                self.result = json.loads( response.read() )
+                self.conn.close()
+            except socket.error:
+                self.result = { 'status': 'network_error' }
+        else:
+            self.result = { 'status': 'no_host' }
 
 class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
 
@@ -66,7 +69,10 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
 
     def get_host( self, filepath ):
         """ Find hostname file and get host for any file in webroot directory"""
-        pathChunks = filepath.split( '/bitrix/' )
+        try:
+            pathChunks = filepath.split( '/bitrix/' )
+        except AttributeError:
+            return False
 
         if len( pathChunks ) > 1:
             # Bitrix directory found
@@ -130,9 +136,6 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
         view = self.view
         path = view.file_name()
         host = self.get_host( path )
-
-        if not host:
-            return False
 
         for thread in self.threads:
             thread.stop()
