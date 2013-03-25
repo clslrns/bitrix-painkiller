@@ -113,7 +113,7 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
         margin = view.sel()[selId].begin() - view.line( view.sel()[selId].begin() ).begin()
 
         prefUnit = ' ' * settings.get('tab_size') if settings.get('translate_tabs_to_spaces') else '\t'
-        pref = margin * prefUnit
+        pref = ' ' * margin if settings.get('translate_tabs_to_spaces') else '\t'
 
         params = u''
         if reqResult['status'] == 'found':
