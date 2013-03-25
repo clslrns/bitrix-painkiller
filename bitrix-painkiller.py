@@ -4,6 +4,7 @@ import re
 import httplib, urllib
 import json
 import os
+import socket
 
 __version__      = '0.1'
 __core_version__ = '0.1'
@@ -15,7 +16,7 @@ settings = sublime.load_settings('Painkiller.sublime-settings')
 class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
 
     def find_name( self, view, cursorId ):
-        """Find name of Bitrix component on the left from cursor."""
+        """Find name of Bitrix component on the left from cursor"""
         end = view.sel()[cursorId].end()
 
         regionContent = view.substr( view.line( end ) )
@@ -32,7 +33,7 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
             return f.read()
 
     def get_host( self, filepath ):
-        """ Find hostname file and get host for any file in webroot directory."""
+        """ Find hostname file and get host for any file in webroot directory"""
         pathChunks = filepath.split( '/bitrix/' )
 
         if len( pathChunks ) > 1:
@@ -64,11 +65,15 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
         return False
 
     def get_component_signature( self, componentName, host ):
-        conn = httplib.HTTPConnection( host )
-        conn.request( 'GET', '/bitrix/tools/painkiller_component_signature.php?component=' + componentName )
-        response = conn.getresponse()
-        componentParams = json.loads( response.read() )
-        conn.close()
+        """ Send requests for component default parameters to site script"""
+        try:
+            conn = httplib.HTTPConnection( host )
+            conn.request( 'GET', '/bitrix/tools/painkiller_component_signature.php?component=' + componentName )
+            response = conn.getresponse()
+            componentParams = json.loads( response.read() )
+            conn.close()
+        except socket.error:
+            componentParams = { 'status': 'network_error' }
         return componentParams
 
     def run( self, edit, block = False ):
