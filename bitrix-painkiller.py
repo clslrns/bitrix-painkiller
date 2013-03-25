@@ -6,7 +6,6 @@ import json
 import os
 import socket
 import threading
-import math
 
 __version__      = '0.1'
 __core_version__ = '0.1'
