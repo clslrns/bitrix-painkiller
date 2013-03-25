@@ -19,5 +19,5 @@ git submodule add git://github.com/clslrns/bitrix-painkiller-module.git bitrix/m
 Установка плагина для Sublime Text 2
 ------------------------------------
 OS X
-`cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/;<br>
+`cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/;
 git clone git@github.com:clslrns/bitrix-painkiller.git`
