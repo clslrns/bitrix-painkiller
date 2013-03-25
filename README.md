@@ -17,7 +17,7 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
     cd site_root
     git submodule add git://github.com/clslrns/bitrix-painkiller-module.git bitrix/modules/thelikers.painkiller
 
-В дугих случаях, скачайте [https://nodeload.github.com/clslrns/bitrix-painkiller-module/zip/master](последнюю версию модуля в архиве) и положите файлы из корня репозитория в директорию `site_root/bitrix/modules/thelikers.painkiller`.
+В дугих случаях, скачайте [последнюю версию модуля в архиве](https://nodeload.github.com/clslrns/bitrix-painkiller-module/zip/master) и положите файлы него в директорию `site_root/bitrix/modules/thelikers.painkiller`.
 
 Затем, в панели управления сайта перейдите в раздел Marketplace — Установленные решения. В контекстном меню напротив модуля Bitrix Painkiller (thelikers.painkiller) выберите «Установить».
 
