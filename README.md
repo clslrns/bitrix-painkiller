@@ -13,18 +13,22 @@ Bitrix Painkiller
     cd site_root
     git submodule add git://github.com/clslrns/bitrix-painkiller-module.git bitrix/modules/thelikers.painkiller
 
-Иначе, скачайте [https://nodeload.github.com/clslrns/bitrix-painkiller-module/zip/master](последнюю версию в архиве) и положите файлы из корня репозитория в директорию `site_root/bitrix/modules/thelikers.painkiller`.
+В дугих случаях, скачайте [https://nodeload.github.com/clslrns/bitrix-painkiller-module/zip/master](последнюю версию модуля в архиве) и положите файлы из корня репозитория в директорию `site_root/bitrix/modules/thelikers.painkiller`.
 
 Затем, в панели управления сайта перейдите в раздел Marketplace — Установленные решения. В контекстном меню напротив модуля Bitrix Painkiller (thelikers.painkiller) выберите «Установить».
 
 ### Плагин для Sublime Text 2
 
-#### OS X
+В данный момент плагин недоступен в репозитории Package Control. Для установки скопируйте или склонируйте содержимое репозитория в директорию с плагинами Sublime Text 2. Узнать её можно в меню Preferences — Browse Packages.
 
-    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/;
+#### Готовые команды
+##### OS X
+
+    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
     git clone git@github.com:clslrns/bitrix-painkiller.git
 
-#### Ubuntu Linux
+##### Ubuntu Linux
 
     cd ~/.config/sublime-text-2/Packages/
     git clone git://github.com/clslrns/bitrix-painkiller.git
+
