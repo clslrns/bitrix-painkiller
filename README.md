@@ -1,6 +1,8 @@
 Bitrix Painkiller
 =================
 
+The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It allows you to convert code like `bitrix:news.list` into a full component inclusion code by <kbd>Tab</kbd>.
+
 Плагин предназначен для облегчения разработки сайтов на 1С-Битрикс. Он позволяет преобразовывать код вида `bitrix:news.list` в полноценный код подключения компонента одним нажатием <kbd>Tab</kbd>.
 
 ![transform](http://picasion.com/pic67/6991b114c4f74ac1b1aaa89f8a456746.gif)
