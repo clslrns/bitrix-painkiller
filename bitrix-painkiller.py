@@ -36,8 +36,8 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
         pathChunks = filepath.split( '/bitrix/' )
 
         if len( pathChunks ) > 1:
-            # Найдена директория bitrix
-            # Проверим, есть ли в ней наш модуль
+            # Bitrix directory found
+            # Check if our module exists in it
             pathChunks.pop()
             currentPath = ''
             for chunk in pathChunks:
