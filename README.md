@@ -9,7 +9,7 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 
 Установка
 -------------------------------
-### Модуль для 1C-Битрикс thelikers.painkiller
+### Модуль thelikers.painkiller для 1C-Битрикс
 Модуль доступен на Github в [отдельном репозитории](https://github.com/clslrns/bitrix-painkiller-module). Он необходим для получения параметров разворачиваемых компонентов. Без установки модуля компоненты будут разворачиваться в такой код:
 
     <?$APPLICATION->IncludeComponent(
