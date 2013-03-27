@@ -9,8 +9,8 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 
 Установка
 -------------------------------
-### Модуль для Битрикса
-Нужен для получения параметров разворачиваемых компонентов. Без установки модуля компоненты будут разворачиваться в такой код:
+### Модуль для 1C-Битрикс thelikers.painkiller
+Модуль доступен на Github в [отдельном репозитории](https://github.com/clslrns/bitrix-painkiller-module). Он необходим для получения параметров разворачиваемых компонентов. Без установки модуля компоненты будут разворачиваться в такой код:
 
     <?$APPLICATION->IncludeComponent(
         'bitrix:menu',
@@ -19,12 +19,12 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
         )
     )?>
 
-Для использования Painkiller в качестве субмодуля выполните команды:
+Можно использовать bitrix-painkiller-module в качестве git-субмодуля:
 
     cd site_root
     git submodule add git://github.com/clslrns/bitrix-painkiller-module.git bitrix/modules/thelikers.painkiller
 
-В дугих случаях, скачайте [последнюю версию модуля в архиве](https://nodeload.github.com/clslrns/bitrix-painkiller-module/zip/master) и положите файлы из него в директорию `site_root/bitrix/modules/thelikers.painkiller`.
+Или скачать [последнюю версию модуля в архиве](https://nodeload.github.com/clslrns/bitrix-painkiller-module/zip/master) и положить файлы из архива в директорию `site_root/bitrix/modules/thelikers.painkiller`.
 
 Затем, в панели управления сайта перейдите в раздел Marketplace — Установленные решения. В контекстном меню напротив модуля Bitrix Painkiller (thelikers.painkiller) выберите «Установить».
 
