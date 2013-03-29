@@ -11,7 +11,7 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 -------------------------------
 ### thelikers.painkiller для 1C-Битрикс
 Установить модуль можно из [Маркетплейса 1С-Битрикс](http://marketplace.1c-bitrix.ru/solutions/thelikers.painkiller/index.php). Также доступен [репозиторий на Github](https://github.com/clslrns/bitrix-painkiller-module).
-Модуль для получения параметров разворачиваемых компонентов.
+Модуль нужен для получения параметров разворачиваемых компонентов.
 
 ### Плагин для Sublime Text 2
 
