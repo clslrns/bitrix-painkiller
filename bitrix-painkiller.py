@@ -70,7 +70,7 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
     def get_host( self, filepath ):
         """ Find hostname file and get host for any file in webroot directory"""
         try:
-            pathChunks = filepath.split('/')
+            pathChunks = filepath.split( os.sep )
         except AttributeError:
             return False
 
@@ -78,8 +78,12 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
 
         currentPath = ''
         for chunk in pathChunks:
-            currentPath += chunk + '/'
-            filename = currentPath + 'bitrix/modules/thelikers.painkiller/site_host'
+            currentPath += chunk + os.sep
+            filename = currentPath \
+                     + 'bitrix' + os.sep \
+                     + 'modules' + os.sep \
+                     + 'thelikers.painkiller' + os.sep \
+                     + 'site_host'
             if os.path.exists( filename ):
                 host = self.file_get_contents( filename )
                 if host:
