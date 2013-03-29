@@ -99,10 +99,16 @@ class BitrixPainkillerCommand( sublime_plugin.TextCommand ):
         view.erase( edit, view.find( name, view.sel()[selId].begin() - len(name) ) )
 
         # Margin for generated lines equals current line' left margin
-        margin = view.sel()[selId].begin() - view.line( view.sel()[selId].begin() ).begin()
+        # Count spaces is a little bit tricky
+        linePrefix = view.substr(
+            sublime.Region( view.line( view.sel()[selId].begin() ).begin(),
+            view.sel()[selId].begin() )
+        )
+        margin = len( linePrefix.replace('\t', ' ' * settings.get('tab_size') ) )
 
         prefUnit = ' ' * settings.get('tab_size') if settings.get('translate_tabs_to_spaces') else '\t'
-        pref = ' ' * margin if settings.get('translate_tabs_to_spaces') else '\t'
+        pref = ' ' * margin if settings.get('translate_tabs_to_spaces') \
+                            else '\t' * ( margin / settings.get('tab_size') )
 
         params = u''
         if reqResult['status'] == 'found':
