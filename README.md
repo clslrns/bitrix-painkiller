@@ -9,24 +9,9 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 
 Установка
 -------------------------------
-### Модуль thelikers.painkiller для 1C-Битрикс
-Модуль доступен на Github в [отдельном репозитории](https://github.com/clslrns/bitrix-painkiller-module). Он необходим для получения параметров разворачиваемых компонентов. Без установки модуля компоненты будут разворачиваться в такой код:
-
-    <?$APPLICATION->IncludeComponent(
-        'bitrix:menu',
-        '',
-        array(
-        )
-    )?>
-
-Можно использовать bitrix-painkiller-module в качестве git-субмодуля:
-
-    cd site_root
-    git submodule add git://github.com/clslrns/bitrix-painkiller-module.git bitrix/modules/thelikers.painkiller
-
-Или скачать [последнюю версию модуля в архиве](https://nodeload.github.com/clslrns/bitrix-painkiller-module/zip/master) и положить файлы из архива в директорию `site_root/bitrix/modules/thelikers.painkiller`.
-
-Затем, в панели управления сайта перейдите в раздел Marketplace — Установленные решения. В контекстном меню напротив модуля Bitrix Painkiller (thelikers.painkiller) выберите «Установить».
+### thelikers.painkiller для 1C-Битрикс
+Установить модуль можно из [Маркетплейса 1С-Битрикс](http://marketplace.1c-bitrix.ru/solutions/thelikers.painkiller/index.php). Также доступен [репозиторий Github](https://github.com/clslrns/bitrix-painkiller-module).
+Модуль для получения параметров разворачиваемых компонентов.
 
 ### Плагин для Sublime Text 2
 
