@@ -7,6 +7,13 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 
 ![transform](http://picasion.com/pic67/6991b114c4f74ac1b1aaa89f8a456746.gif)
 
+Особенности
+-----------
+* Поддерживает множественные курсоры;
+* Запрашивает параметры компонентов асинхронно, не вешая редактор;
+* Учитывает ваши настройки форматирования (табы или пробелы, ширину отступов);
+* Работает для компонентов из неймспейсов, отличных от bitrix.
+
 Установка
 -------------------------------
 ### thelikers.painkiller для 1C-Битрикс
@@ -28,3 +35,8 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
     cd ~/.config/sublime-text-2/Packages/
     git clone git://github.com/clslrns/bitrix-painkiller.git
 
+Известные проблемы
+------------------
+Возможен конфликт с плагином Emmet. Вы можете переназначить сочетание клавиш для Painkiller, либо отвязать Emmet от кнопри Tab, добавив в пользовательский конфиг параметр:
+
+    "disable_tab_abbreviations": true
