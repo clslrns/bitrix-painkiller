@@ -22,7 +22,7 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 
 ### Плагин для Sublime Text 2
 
-В данный момент плагин недоступен в репозитории Package Control. Для установки скопируйте или склонируйте содержимое репозитория в директорию с плагинами Sublime Text 2. Узнать её можно в меню Preferences — Browse Packages.
+Для начала, если вы этого ещё не сделали, установите [Package Control](http://wbond.net/sublime_packages/package_control). После установки сделайте Tools — Command Pallete — Package Control: Install Package — Bitrix Painkiller.
 
 #### Готовые команды
 ##### OS X
