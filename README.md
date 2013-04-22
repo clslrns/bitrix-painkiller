@@ -26,6 +26,6 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 
 Известные проблемы
 ------------------
-Возможен конфликт с плагином Emmet. Вы можете переназначить сочетание клавиш для Painkiller, либо отвязать Emmet от кнопри Tab, добавив в пользовательский конфиг параметр:
+Возможен конфликт с плагином Emmet. Вы можете переназначить сочетание клавиш для Painkiller, либо отвязать Emmet от клавиши Tab, добавив в пользовательский конфиг параметр:
 
     "disable_tab_abbreviations": true
