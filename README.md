@@ -24,17 +24,6 @@ The plugin is designed to ease the development of web sites on 1C-Bitrix CMS. It
 
 Для начала, если вы этого ещё не сделали, установите [Package Control](http://wbond.net/sublime_packages/package_control). После установки сделайте Tools — Command Pallete — Package Control: Install Package — Bitrix Painkiller.
 
-#### Готовые команды
-##### OS X
-
-    cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
-    git clone git@github.com:clslrns/bitrix-painkiller.git
-
-##### Ubuntu Linux
-
-    cd ~/.config/sublime-text-2/Packages/
-    git clone git://github.com/clslrns/bitrix-painkiller.git
-
 Известные проблемы
 ------------------
 Возможен конфликт с плагином Emmet. Вы можете переназначить сочетание клавиш для Painkiller, либо отвязать Emmet от кнопри Tab, добавив в пользовательский конфиг параметр:
